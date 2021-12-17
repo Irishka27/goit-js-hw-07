@@ -22,21 +22,26 @@ function createGalleryMarkup(galleryItems) {
     }).join('');
     
 };
-
-
-
+gallery.addEventListener('click', onImageClick);
 function onImageClick(e) {
     e.preventDefault();
     // if (!e.target.classList.contains('gallery__item')) {
     //     return;
     // }
-    const image = e.target.dataset.sourse;
+    const image = e.target.dataset.source;
     const instance = basicLightbox.create(`
-    <img src = "${e.target.dataset.sourse}" width = "800" height = "600">`);
-     instance.show();
+    <img src = "${image}" width = "800" height = "600">`);
+    instance.show();
+    document.addEventListener('keydown', onCloseModal);
+    function onCloseModal(e) {
+        if (e.code === 'Escape') {
+            instance.close();
+        }
+    }
   
 };
-   gallery.addEventListener('click', onImageClick);
+
+
       
     
 
